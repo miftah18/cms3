@@ -1,0 +1,317 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.6%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.6%;
+    --primary: 262 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 262 100% 60%;
+    --warning: 45 93.4% 47.5%;
+    --warning-foreground: 0 0% 100%;
+    --success: 142.4 71.8% 29.3%;
+    --success-foreground: 0 0% 100%;
+    --info: 210 100% 50%;
+    --info-foreground: 0 0% 100%;
+    --radius: 0.5rem;
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+    /* Font variables */
+    --font-sans: system-ui, -apple-system, sans-serif;
+    --font-mono: 'Menlo', 'Monaco', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* Dark mode colors */
+      --background: 0 0% 3.6%;
+      --foreground: 0 0% 98.2%;
+      --card: 0 0% 10%;
+      --card-foreground: 0 0% 98.2%;
+      --primary: 262 100% 60%;
+      --primary-foreground: 0 0% 9%;
+      --secondary: 0 0% 14.9%;
+      --secondary-foreground: 0 0% 98.2%;
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 9%;
+      --muted: 0 0% 14.9%;
+      --muted-foreground: 0 0% 63.9%;
+      --accent: 210 100% 50%;
+      --accent-foreground: 0 0% 9%;
+      --border: 0 0% 14.9%;
+      --input: 0 0% 14.9%;
+      --ring: 262 100% 60%;
+      --warning: 45 93.4% 47.5%;
+      --warning-foreground: 0 0% 0%;
+      --success: 142.4 71.8% 29.3%;
+      --success-foreground: 0 0% 100%;
+      --info: 210 100% 50%;
+      --info-foreground: 0 0% 100%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-base;
+  }
+
+  a {
+    @apply text-primary hover:underline;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Utility classes */
+  .sr-only {
+    @apply absolute h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 clip;
+  }
+
+  /* Loading state */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  /* Skeleton loading */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--muted) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      var(--muted) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    @apply h-2 w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-muted hover:bg-muted-foreground;
+  }
+
+  /* Focus visible ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background rounded;
+  }
+
+  /* Print styles */
+  @media print {
+    body {
+      @apply bg-white text-black;
+    }
+  }
+}
+
+@layer components {
+  /* Button styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .btn-destructive {
+    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
+  }
+
+  /* Card styles */
+  .card {
+    @apply rounded-lg border border-border bg-card p-6 shadow-sm;
+  }
+
+  .card-header {
+    @apply mb-4 border-b border-border pb-4;
+  }
+
+  .card-title {
+    @apply text-2xl font-semibold;
+  }
+
+  .card-description {
+    @apply text-muted-foreground;
+  }
+
+  .card-content {
+    @apply pt-4;
+  }
+
+  .card-footer {
+    @apply border-t border-border pt-4 mt-4;
+  }
+
+  /* Form styles */
+  .form-group {
+    @apply mb-6 space-y-2;
+  }
+
+  .form-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+
+  .form-control {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .form-error {
+    @apply text-xs font-medium text-destructive;
+  }
+
+  /* Alert styles */
+  .alert {
+    @apply rounded-lg border p-4;
+  }
+
+  .alert-info {
+    @apply border-info bg-info/10 text-info;
+  }
+
+  .alert-success {
+    @apply border-success bg-success/10 text-success;
+  }
+
+  .alert-warning {
+    @apply border-warning bg-warning/10 text-warning;
+  }
+
+  .alert-error {
+    @apply border-destructive bg-destructive/10 text-destructive;
+  }
+
+  /* Container */
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Flex utilities */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+}
+
+/* Offline styles */
+@layer components {
+  .offline-banner {
+    @apply fixed top-0 left-0 right-0 z-50 bg-warning/10 border-b border-warning/20 px-4 py-3;
+  }
+
+  .offline-badge {
+    @apply inline-flex items-center gap-1 rounded-full bg-warning/20 px-3 py-1 text-xs font-medium text-warning;
+  }
+
+  .offline-overlay {
+    @apply absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg;
+  }
+}
+
+/* Accessibility improvements */
+@layer utilities {
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      @apply !animate-none !transition-none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: more) {
+    :root {
+      --primary: 262 100% 40%;
+      --secondary: 0 0% 0%;
+    }
+  }
+}
