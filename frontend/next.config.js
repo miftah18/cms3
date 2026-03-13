@@ -18,17 +18,8 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
 
-  // Webpack config
-  webpack: (config, { isServer }) => {
-    // Add web worker support
-    config.module.rules.push({
-      test: /\.worker\.ts$/,
-      loader: 'worker-loader',
-      options: {
-        filename: 'static/[hash].worker.js',
-      },
-    });
-
+  // Webpack config - minimal for now
+  webpack: (config) => {
     return config;
   },
 

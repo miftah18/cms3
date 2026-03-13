@@ -34,7 +34,7 @@ export function useProfile() {
     setLoading(true);
     setError(null);
     try {
-      const response = await apiClient.get(`/api/v1/users/${user.id}/`);
+      const response = await apiClient.get(`/users/${user.id}/`);
       setProfile(response.data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch profile');
@@ -49,7 +49,7 @@ export function useProfile() {
     setLoading(true);
     setError(null);
     try {
-      const response = await apiClient.patch(`/api/v1/users/${user.id}/`, data);
+      const response = await apiClient.patch(`/users/${user.id}/`, data);
       setProfile(response.data);
       return response.data;
     } catch (err) {

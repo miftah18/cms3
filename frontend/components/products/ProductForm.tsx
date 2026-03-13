@@ -5,9 +5,23 @@ import { useProducts } from '@/lib/hooks/useProducts';
 import { useCategories } from '@/lib/hooks/useCategories';
 import { useRouter } from 'next/navigation';
 
+interface Product {
+  id?: string;
+  name: string;
+  code: string;
+  category: string;
+  price: number;
+  cost?: number;
+  quantity: number;
+  unit: string;
+  description?: string;
+  sku?: string;
+  barcode?: string;
+}
+
 interface ProductFormProps {
   productId?: string;
-  initialData?: any;
+  initialData?: Product;
 }
 
 export function ProductForm({ productId, initialData }: ProductFormProps) {
